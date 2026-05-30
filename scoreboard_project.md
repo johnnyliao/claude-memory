@@ -27,8 +27,10 @@ Soccer scoreboard app that:
 - `ios/Podfile` — `pod 'HaishinKit', '1.9.9'`, `platform :ios, '13.0'`
 - `.github/workflows/build-ios.yml` — GitHub Actions CI/CD (push to main → build IPA artifact)
 
-## Current State (latest commit: 7283bfc, 2026-05-27)
-**Status: ✅ WORKING — 1080p streaming + broadcast-style overlay + match clock + goal-scorer picker, confirmed live by user.**
+## Current State (latest commit: a97cfac, 2026-05-28)
+**Status: ✅ WORKING — 1080p30 streaming + broadcast-style overlay + match clock + goal-scorer picker (14 players incl. 2 loaned) + selectable team colors. Screen stays awake while live. Confirmed live by user.**
+
+Additions this session (2026-05-28): selectable team colors synced to overlay (home 橘/紫, away 10 colors via palette icon beside edit-name; luminance-based text contrast on score cells); goal-picker landscape overflow fix (Flexible + scrollable — bottom row had been untappable); 2 loaned players (簡/林, no jersey number → tile shows surname, celebration shows name 以諾/言瑀); player #2 corrected 秉彥→秉諺; REAL 30fps via Screen.frameRate fix + keep-screen-awake during stream (both detailed in [[scoreboard-tech-decisions]]).
 
 Architecture: HaishinKit `RTMPStream` + `attachCamera`/`attachAudio` + `.offscreen` videoMixer mode + `registerVideoEffect(ScoreboardOverlayEffect)` for the score & celebration overlays. YouTube broadcast is created programmatically via OAuth + YouTube Data API (`lib/youtube_service.dart`), no manual Studio setup.
 
